@@ -62,7 +62,7 @@ export const LoginPage = () => {
                         </form>
                         <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
 
-                            <p class="block mb-2 text-md font-medium text-gray-600 dark:text-white">Login with ...</p>
+                            <p class="block mb-2 text-md font-medium text-gray-500">Login with ...</p>
                             <button className="badge badge-primary p-4 mt-3 text-white" onClick={() => handleProviderLogin(googleProvider)}><FaGoogle /> <span className='ml-4'>Google</span></button>
 
                         </div>
