@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashbord from "../dashbord/Dashbord";
 import Main from "../layout/Main";
 import { Blog } from "../pages/Blog";
 import { HomePage } from "../pages/HomePage";
@@ -28,5 +29,9 @@ export const routes = createBrowserRouter([
             },
         
         ]
-    }
+    },
+    {
+        path: "/dashbord",
+        element: <Dashbord />,
+    },
 ])
