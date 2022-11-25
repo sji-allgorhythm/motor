@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AuthContext } from '../contexts/AuthProvider';
@@ -10,6 +10,11 @@ export const LoginPage = () => {
 
     // Provider
     const googleProvider = new GoogleAuthProvider();
+
+    // dynamic Route Link 
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    const navigate = useNavigate()
 
     const { providerLogin, signIn } = useContext(AuthContext);
 
@@ -29,6 +34,7 @@ export const LoginPage = () => {
                     email: user.email
                 }
 
+                navigate(from, { replace: true });
                 toast.success('Login Successful ');
 
 
@@ -62,6 +68,7 @@ export const LoginPage = () => {
                 })
                     .then(function (response) {
                         if (response.data.acknowledged) {
+                            navigate(from, { replace: true });
                             toast.success('Login Successful');
                         }
                     })
