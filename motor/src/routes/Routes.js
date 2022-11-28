@@ -3,6 +3,7 @@ import { AddProducts } from "../dashbord/AddProducts";
 import { AllBuyer } from "../dashbord/AllBuyer";
 import { AllSeller } from "../dashbord/AllSeller";
 import Dashbord from "../dashbord/Dashbord";
+import { DashbordHome } from "../dashbord/DashbordHome";
 import Main from "../layout/Main";
 import { Blog } from "../pages/Blog";
 import { HomePage } from "../pages/HomePage";
@@ -38,6 +39,10 @@ export const routes = createBrowserRouter([
         path: "/dashbord",
         element: <PrivateRoute><Dashbord /></PrivateRoute>,
         children: [
+            {
+                path: "/dashbord",
+                element: <DashbordHome />,
+            },
             {
                 path: "/dashbord/add-product",
                 element: <AddProducts />,

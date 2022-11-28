@@ -23,7 +23,7 @@ export const AllBuyer = () => {
             <tbody>
               {
                 allBuyer.map((user, i) =>
-                  <tr>
+                  <tr key={user?._id}>
                     <th>{i + 1}</th>
                     <td>{user?.name}</td>
                     <td>{user?.email}</td>

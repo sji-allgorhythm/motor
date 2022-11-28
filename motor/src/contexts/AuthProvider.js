@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         logOut,
         loading,
-        updateUserInfo
+        updateUserInfo,
     };
 
     return (

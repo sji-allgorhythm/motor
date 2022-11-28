@@ -17,17 +17,19 @@ export const AllSeller = () => {
                 <th></th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Verified</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {
                 allSeller.map((user, i) =>
-                  <tr>
+                  <tr key={user?._id}>
                     <th>{i + 1}</th>
                     <td>{user?.name}</td>
                     <td>{user?.email}</td>
-                    <td>Delete | {user?.verified ? <>yes</> : <>No</>}</td>
+                    <td>{user?.verified ? <>yes</> : <>No</>}</td>
+                    <td>Delete</td>
                   </tr>
                 )
               }
