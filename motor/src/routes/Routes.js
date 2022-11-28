@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AddProducts } from "../dashbord/AddProducts";
+import { AllBuyer } from "../dashbord/AllBuyer";
+import { AllSeller } from "../dashbord/AllSeller";
 import Dashbord from "../dashbord/Dashbord";
 import Main from "../layout/Main";
 import { Blog } from "../pages/Blog";
@@ -39,6 +41,16 @@ export const routes = createBrowserRouter([
             {
                 path: "/dashbord/add-product",
                 element: <AddProducts />,
+            },
+            {
+                path: "/dashbord/all/sellers",
+                element: <AllSeller />,
+                loader:() => fetch(`${process.env.REACT_APP_url}/api/user`)
+            },
+            {
+                path: "/dashbord/all/buyers",
+                element: <AllBuyer />,
+                loader:() => fetch(`${process.env.REACT_APP_url}/api/user`)
             },
             
         ]

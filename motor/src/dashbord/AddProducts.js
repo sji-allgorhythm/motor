@@ -1,8 +1,9 @@
 import React from 'react'
+import { useForm } from 'react-hook-form';
 
 export const AddProducts = () => {
 
-
+    const { register, handleSubmit } = useForm();
 
 
     // "posted_timeStamp": 123,
@@ -11,7 +12,9 @@ export const AddProducts = () => {
     //     "category_id": "04",
     // }
 
-
+    const onSubmit = data => {
+        console.log(data)
+    }
 
 
     return (
@@ -22,7 +25,7 @@ export const AddProducts = () => {
                     <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
                 </div>
                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
-                    <form class="flex flex-wrap -m-2">
+                    <form onSubmit={handleSubmit(onSubmit)} class="flex flex-wrap -m-2">
                         <div class="p-2 w-1/2">
                             <div class="relative">
                                 <label for="name" class="leading-7 text-md text-gray-600">Product Name</label>
@@ -74,7 +77,26 @@ export const AddProducts = () => {
                         </div>
 
                         <div className="flex flex-col w-full border-opacity-50">
-                            <div className="divider text-lg">Your Info</div>
+                            <div className="divider text-lg">Additional Info</div>
+                        </div>
+
+                        <div class="p-2 w-1/2">
+                            <div class="relative">
+                                <label for="email" class="leading-7 text-md text-gray-600">Category Name</label>
+                                <select id="role" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-[10px] px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <option value="seller">Honda</option>
+                                    <option value="buyer">KTM</option>
+                                    <option value="buyer">Suzuki</option>
+                                    <option value="buyer">Yamaha</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="p-2 w-1/2">
+                            <div class="relative">
+                                <label for="mobile" class="leading-7 text-md text-gray-600">Mobile Number</label>
+                                <input type="number" name="mobile" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            </div>
                         </div>
 
                         <div class="p-2 mt-5 w-full">

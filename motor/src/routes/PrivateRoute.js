@@ -12,7 +12,6 @@ const PrivateRoute = ({ children }) => {
     if (loading) {
         return (
             <div className='flex justify-center h-screen'>
-
                 <SpinnerDotted size={60} thickness={100} speed={100} color="rgba(140, 3, 39, 1)"/>
             </div>
         )

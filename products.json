@@ -1,0 +1,37 @@
+[
+    {
+        "product_title": "The Ultimate Guide to Game Development with Unity (Official)",
+        "thumbnail_url": "https://img-c.udemycdn.com/course/240x135/1328572_b05d_5.jpg",
+        "original_price": 199,
+        "resale_price": 199,
+        "years of use": 2,
+        "posted_timeStamp": 123,
+        "category": {
+            "category_name": "Game Development",
+            "category_id": "04"
+        },
+        "condition type": "good",
+        "description": "This is a very Good Product",
+    },
+    // user table
+    {
+        "name": "moon",
+        "email": "moon@gmail.com",
+        "role": "admin",
+        "address": {
+            "mobile_number": "01686076447",
+            "location": "Dhaka"
+        },
+        "verified": true
+    }
+    // order table
+    {
+        "buyer_name": "moon",
+        "buyer_email": "moon@gmail.com",
+        "address": {
+            "mobile_number": "01686076447",
+            "location": "Dhaka"
+        },
+        "verified": true
+    }
+]
