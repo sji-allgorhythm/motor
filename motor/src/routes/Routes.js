@@ -25,16 +25,6 @@ export const routes = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "/category/:id",
-                element: <Category />,
-                loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/product/${params.id}`),
-            },
-            {
-                path: "/product/single/:id",
-                element: <Product />,
-                loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/product/single/${params.id}`),
-            },
-            {
                 path: "/blog",
                 element: <Blog />,
             },
@@ -45,6 +35,16 @@ export const routes = createBrowserRouter([
             {
                 path: "/register",
                 element: <RegisterPage />,
+            },
+            {
+                path: "/category/:id",
+                element: <PrivateRoute><Category /></PrivateRoute>,
+                loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/product/${params.id}`),
+            },
+            {
+                path: "/product/single/:id",
+                element: <PrivateRoute><Product /></PrivateRoute>,
+                loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/product/single/${params.id}`),
             },
 
         ]
