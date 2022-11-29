@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 
 export const AddProducts = () => {
@@ -8,12 +9,7 @@ export const AddProducts = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, reset } = useForm();
 
-
-    // "posted_timeStamp": 123,
-    //     "category": {
-    //     "category_name": "Game Development",
-    //     "category_id": "04",
-    // }
+    const navigate = useNavigate()
 
     const onSubmit = data => {
 
@@ -28,8 +24,6 @@ export const AddProducts = () => {
         const seller_location = data.pickUp_location
         const seller_name = data.seller_name
         const seller_email = data.seller_email
-
-
 
 
         const formData = new FormData()
@@ -74,12 +68,10 @@ export const AddProducts = () => {
                         if (data.acknowledged) {
                             toast.success('Product Added')
                             reset();
+                            navigate("/dashbord/my-products")
                         }
                     })
 
-
-                
-                console.log(addProduct)
             })
 
 
@@ -104,7 +96,7 @@ export const AddProducts = () => {
                         <div className="p-2 w-1/2">
                             <div className="relative">
                                 <label htmlFor="image" accept="image/*" className="leading-7 text-md text-gray-600">Product Image</label>
-                                <input type="file" id="image" name="image" {...register("product_image")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700  px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                <input type="file" id="image" name="image" {...register("product_image", { required: true })} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700  px-3 leading-8 transition-colors duration-200 ease-in-out" />
                             </div>
                         </div>
 

@@ -45,18 +45,12 @@ export const RegisterPage = () => {
             console.log(error);
           });
 
-
-
-
-
-
       })
       .catch((error) => {
         const errorMessage = error.message;
         toast.error(errorMessage);
 
       });
-
 
   }
 
