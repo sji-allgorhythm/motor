@@ -8,8 +8,10 @@ import { DashbordHome } from "../dashbord/DashbordHome";
 import { MyProducts } from "../dashbord/MyProducts";
 import Main from "../layout/Main";
 import { Blog } from "../pages/Blog";
+import { Category } from "../pages/Category";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
+import { Product } from "../pages/Product";
 import { RegisterPage } from "../pages/RegisterPage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -21,6 +23,15 @@ export const routes = createBrowserRouter([
             {
                 path: "/",
                 element: <HomePage />,
+            },
+            {
+                path: "/category/:id",
+                element: <Category />,
+                loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/product/${params.id}`),
+            },
+            {
+                path: "/product",
+                element: <Product />,
             },
             {
                 path: "/blog",

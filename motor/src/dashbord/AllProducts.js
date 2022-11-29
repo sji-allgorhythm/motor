@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { FaRegTrashAlt } from 'react-icons/fa';
-import { AuthContext } from '../contexts/AuthProvider';
 
 export const AllProducts = () => {
 
@@ -16,7 +15,7 @@ export const AllProducts = () => {
             })
             .catch(err => console.error(err))
 
-    }, [])
+    }, [refresh])
 
     // console.log(products)
 
@@ -24,7 +23,7 @@ export const AllProducts = () => {
     const handleDelete = id => {
 
         // sending the data to server
-        fetch(`https://b6a11-service-review-server-side-mushfiq-moon.vercel.app/reviews/${id}`, {
+        fetch(`${process.env.REACT_APP_url}/api/product/${id}`, {
             method: 'Delete',
             headers: {
                 'Content-Type': 'application/json'

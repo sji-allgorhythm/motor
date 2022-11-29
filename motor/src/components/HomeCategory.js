@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Loader } from './common/Loader'
 
 export const HomeCategory = () => {
@@ -14,8 +15,6 @@ export const HomeCategory = () => {
 
   }, [])
 
-
-
   return (
     <>
       <section className="text-gray-600 body-font">
@@ -30,7 +29,7 @@ export const HomeCategory = () => {
                       <img src={cat?.brandImg} alt={cat?.brandName} />
                       <div className="p-6 bg-white flex justify-between">
                         <h2 className="card-title">{cat?.brandName}</h2>
-                        <div className="btn btn-sm btn-primary text-white capitalize">View Items</div>
+                        <Link to={`category/${cat?._id}`} className="btn btn-sm btn-primary text-white capitalize">View Items</Link>
                       </div>
                     </div>
                   </div>
