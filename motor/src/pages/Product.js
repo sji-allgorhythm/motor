@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import toast from 'react-hot-toast';
 import { FaRegFileExcel } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthProvider';
@@ -17,7 +18,7 @@ export const Product = () => {
     const product_name = form.name.value;
     const product_resellPrice = form.re_price.value;
     const buyer_mobile = form.user_mobile.value;
-    const buyer_pickUp_location = form.pickUp_location.value;
+    const Meeting = form.meeting_location.value;
     const buyer_name = form.user_name.value;
     const buyer_email = form.user_email.value;
 
@@ -25,12 +26,31 @@ export const Product = () => {
       product_name,
       product_resellPrice,
       buyer_mobile,
-      buyer_pickUp_location,
+      Meeting,
       buyer_name,
       buyer_email,
     }
 
-    setShowModal(false)
+
+    // sending the data to server
+    fetch(`${process.env.REACT_APP_url}/api/add/order`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        if (data.acknowledged) {
+          toast.success('Product Added')
+          form.reset()
+          setShowModal(false)
+        }
+      })
+
+    
     console.log(order)
   }
 
@@ -85,7 +105,7 @@ export const Product = () => {
                     className="cursor-pointer flex ml-auto text-white bg-primary border-0 py-2 px-6 focus:outline-none rounded"
                     type="button"
                     onClick={() => setShowModal(true)}>
-                    Open regular modal
+                    Order Now
                   </button>
                   <button className='cursor-pointer text-white bg-accent rounded border-0 py-2 px-6 ml-2'><FaRegFileExcel /></button>
                 </div>
@@ -132,8 +152,8 @@ export const Product = () => {
 
                     <div className="p-2 w-full">
                       <div className="relative">
-                        <label htmlFor="pickUp_location" className="leading-7 text-md text-gray-600">Pick Up Location</label>
-                        <input type="text" id="pickUp_location" name="pickUp_location" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <label htmlFor="meeting_location" className="leading-7 text-md text-gray-600">Meeting Location</label>
+                        <input type="text" id="meeting_location" name="meeting_location" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                       </div>
                     </div>
 
@@ -164,7 +184,7 @@ export const Product = () => {
                         type="submit"
                       // onClick={() => setShowModal(false)}
                       >
-                        Save Changes
+                        Submit
                       </button>
                       <button
                         className="ml-3 bg-accent text-white font-bold uppercase text-sm px-5 py-3 rounded shadow outline-none mb-1 ease-linear transition-all duration-150"

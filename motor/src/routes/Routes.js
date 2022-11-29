@@ -5,6 +5,7 @@ import { AllProducts } from "../dashbord/AllProducts";
 import { AllSeller } from "../dashbord/AllSeller";
 import Dashbord from "../dashbord/Dashbord";
 import { DashbordHome } from "../dashbord/DashbordHome";
+import { MyOrder } from "../dashbord/MyOrder";
 import { MyProducts } from "../dashbord/MyProducts";
 import Main from "../layout/Main";
 import { Blog } from "../pages/Blog";
@@ -68,6 +69,10 @@ export const routes = createBrowserRouter([
             {
                 path: "/dashbord/all-products",
                 element: <PrivateRoute><AllProducts /></PrivateRoute>,
+            },
+            {
+                path: "/dashbord/my-order",
+                element: <PrivateRoute><MyOrder /></PrivateRoute>,
             },
             {
                 path: "/dashbord/all/sellers",
