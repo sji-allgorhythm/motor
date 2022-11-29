@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { AuthContext } from '../contexts/AuthProvider';
 
 export const AddProducts = () => {
 
-    const { register, handleSubmit } = useForm();
+    const { user } = useContext(AuthContext);
+    const { register, handleSubmit, reset } = useForm();
 
 
     // "posted_timeStamp": 123,
@@ -13,66 +16,161 @@ export const AddProducts = () => {
     // }
 
     const onSubmit = data => {
-        console.log(data)
+
+        const product_name = data.product_name
+        const product_description = data.message
+        const original_price = data.or_price
+        const resell_price = data.re_price
+        const used_time = data.use_duration
+        const product_condition = data.condition
+        const category_id = data.category_id
+        const seller_mobile = data.mobile
+        const seller_location = data.pickUp_location
+        const seller_name = data.seller_name
+        const seller_email = data.seller_email
+
+
+
+
+        const formData = new FormData()
+        formData.append('image', data.product_image[0])
+
+        fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_image_api}`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                const addProduct = {
+                    product_name,
+                    product_img: data.data.display_url,
+                    product_description,
+                    original_price,
+                    resell_price,
+                    used_time,
+                    product_condition,
+                    category_id,
+                    seller_mobile,
+                    seller_location,
+                    seller_name,
+                    seller_email
+
+                }
+
+
+                // sending the data to server
+
+                fetch(`${process.env.REACT_APP_url}/api/add/product`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(addProduct),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data)
+                        if (data.acknowledged) {
+                            toast.success('Product Added')
+                            reset();
+                        }
+                    })
+
+
+                
+                console.log(addProduct)
+            })
+
+
     }
 
 
     return (
-        <section class="text-gray-600 body-font relative">
-            <div class="container px-5 py-24 mx-auto">
-                <div class="flex flex-col text-center w-full mb-12">
-                    <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
-                    <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
+        <section className="text-gray-600 body-font relative">
+            <div className="container px-5 py-24 mx-auto">
+                <div className="flex flex-col text-center w-full mb-12">
+                    <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
+                    <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
                 </div>
-                <div class="lg:w-1/2 md:w-2/3 mx-auto">
-                    <form onSubmit={handleSubmit(onSubmit)} class="flex flex-wrap -m-2">
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="name" class="leading-7 text-md text-gray-600">Product Name</label>
-                                <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <div className="lg:w-1/2 md:w-2/3 mx-auto">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap -m-2">
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="name" className="leading-7 text-md text-gray-600">Product Name</label>
+                                <input type="text" id="name" name="name" {...register("product_name")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                             </div>
                         </div>
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="email" class="leading-7 text-md text-gray-600">Product Image</label>
-                                <input type="file" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700  px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                            </div>
-                        </div>
-
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="email" class="leading-7 text-md text-gray-600">Original Price</label>
-                                <input type="number" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                            </div>
-                        </div>
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="email" class="leading-7 text-md text-gray-600">Resale Price</label>
-                                <input type="number" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="image" accept="image/*" className="leading-7 text-md text-gray-600">Product Image</label>
+                                <input type="file" id="image" name="image" {...register("product_image")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700  px-3 leading-8 transition-colors duration-200 ease-in-out" />
                             </div>
                         </div>
 
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="email" class="leading-7 text-md text-gray-600">Years of Use</label>
-                                <input type="number" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="or_price" className="leading-7 text-md text-gray-600">Original Price</label>
+                                <input type="number" id="or_price" name="or_price" {...register("or_price")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                             </div>
                         </div>
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="email" class="leading-7 text-md text-gray-600">Condition Type</label>
-                                <select id="role" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-[10px] px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <option value="seller">Fair</option>
-                                    <option value="buyer">Good</option>
-                                    <option value="buyer">Excellent</option>
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="re_price" className="leading-7 text-md text-gray-600">Resale Price</label>
+                                <input type="number" id="re_price" name="re_price" {...register("re_price")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            </div>
+                        </div>
+
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="use_duration" className="leading-7 text-md text-gray-600">Years of Use</label>
+                                <input type="number" id="use_duration" name="use_duration" {...register("use_duration")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            </div>
+                        </div>
+
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="condition" className="leading-7 text-md text-gray-600">Condition Type</label>
+                                <select id="condition" {...register("condition", { required: true })} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-[10px] px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <option value="">Select...</option>
+                                    <option value="fair">Fair</option>
+                                    <option value="good">Good</option>
+                                    <option value="excellent">Excellent</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="p-2 w-full">
-                            <div class="relative">
-                                <label for="message" class="leading-7 text-md text-gray-600">Product Description</label>
-                                <textarea id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="category" className="leading-7 text-md text-gray-600">Category Name</label>
+                                <select id="category" {...register("category_id", { required: true })} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-[10px] px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <option value="">Select...</option>
+                                    <option value="637f7fc50a9cd6168efe98b5">Honda</option>
+                                    <option value="637f7fc50a9cd6168efe98b6">KTM</option>
+                                    <option value="637f7fc50a9cd6168efe98b7">Suzuki</option>
+                                    <option value="637f7fc50a9cd6168efe98b8">Yamaha</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="mobile" className="leading-7 text-md text-gray-600">Mobile Number</label>
+                                <input type="number" id="mobile" name="mobile" {...register("mobile")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            </div>
+                        </div>
+
+                        <div className="p-2 w-full">
+                            <div className="relative">
+                                <label htmlFor="pickUp_location" className="leading-7 text-md text-gray-600">Pick Up Location</label>
+                                <input type="text" id="pickUp_location" name="pickUp_location" {...register("pickUp_location")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            </div>
+                        </div>
+
+                        <div className="p-2 w-full">
+                            <div className="relative">
+                                <label htmlFor="message" className="leading-7 text-md text-gray-600">Product Description</label>
+                                <textarea id="message" name="message" {...register("message")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                             </div>
                         </div>
 
@@ -80,27 +178,22 @@ export const AddProducts = () => {
                             <div className="divider text-lg">Additional Info</div>
                         </div>
 
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="email" class="leading-7 text-md text-gray-600">Category Name</label>
-                                <select id="role" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-[10px] px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                    <option value="seller">Honda</option>
-                                    <option value="buyer">KTM</option>
-                                    <option value="buyer">Suzuki</option>
-                                    <option value="buyer">Yamaha</option>
-                                </select>
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="user_name" className="leading-7 text-md text-gray-600">Your Name</label>
+                                <input type="text" id="user_name" name="user_name" readOnly value={user?.displayName} {...register("seller_name")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                             </div>
                         </div>
 
-                        <div class="p-2 w-1/2">
-                            <div class="relative">
-                                <label for="mobile" class="leading-7 text-md text-gray-600">Mobile Number</label>
-                                <input type="number" name="mobile" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                        <div className="p-2 w-1/2">
+                            <div className="relative">
+                                <label htmlFor="user_email" className="leading-7 text-md text-gray-600">Your Email</label>
+                                <input type="email" id="user_email" readOnly name="user_email" value={user?.email} {...register("seller_email")} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                             </div>
                         </div>
 
-                        <div class="p-2 mt-5 w-full">
-                            <button class="flex mx-auto btn btn-primary text-gray-200 border-0 py-2 px-8 rounded text-lg">Add Product</button>
+                        <div className="p-2 mt-5 w-full">
+                            <button className="flex mx-auto btn btn-primary text-gray-200 border-0 py-2 px-8 rounded text-lg">Add Product</button>
                         </div>
 
                     </form>

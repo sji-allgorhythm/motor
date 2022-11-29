@@ -4,6 +4,7 @@ import { AllBuyer } from "../dashbord/AllBuyer";
 import { AllSeller } from "../dashbord/AllSeller";
 import Dashbord from "../dashbord/Dashbord";
 import { DashbordHome } from "../dashbord/DashbordHome";
+import { MyProducts } from "../dashbord/MyProducts";
 import Main from "../layout/Main";
 import { Blog } from "../pages/Blog";
 import { HomePage } from "../pages/HomePage";
@@ -32,7 +33,7 @@ export const routes = createBrowserRouter([
                 path: "/register",
                 element: <RegisterPage />,
             },
-        
+
         ]
     },
     {
@@ -41,23 +42,27 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: "/dashbord",
-                element: <DashbordHome />,
+                element: <PrivateRoute><DashbordHome /></PrivateRoute>,
             },
             {
                 path: "/dashbord/add-product",
-                element: <AddProducts />,
+                element: <PrivateRoute><AddProducts /></PrivateRoute>,
+            },
+            {
+                path: "/dashbord/my-products",
+                element: <PrivateRoute><MyProducts /></PrivateRoute>,
             },
             {
                 path: "/dashbord/all/sellers",
-                element: <AllSeller />,
-                loader:() => fetch(`${process.env.REACT_APP_url}/api/user`)
+                element: <PrivateRoute><AllSeller /></PrivateRoute>,
+                loader: () => fetch(`${process.env.REACT_APP_url}/api/user`)
             },
             {
                 path: "/dashbord/all/buyers",
-                element: <AllBuyer />,
-                loader:() => fetch(`${process.env.REACT_APP_url}/api/user`)
+                element: <PrivateRoute><AllBuyer /></PrivateRoute>,
+                loader: () => fetch(`${process.env.REACT_APP_url}/api/user`)
             },
-            
+
         ]
     },
 ])

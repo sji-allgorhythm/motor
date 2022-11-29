@@ -7,8 +7,8 @@ export const AllBuyer = () => {
   const allBuyer = users.filter(buyer => buyer.role === "buyer")
 
   return (
-    <section class="text-gray-600 body-font relative">
-      <div class="container px-5 py-24 mx-auto">
+    <section className="text-gray-600 body-font relative">
+      <div className="container px-5 py-24 mx-auto">
         <h3 className='sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900'>All Buyer List </h3>
         <div className="overflow-x-auto">
           <table className="table w-full">
