@@ -30,8 +30,9 @@ export const routes = createBrowserRouter([
                 loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/product/${params.id}`),
             },
             {
-                path: "/product",
+                path: "/product/single/:id",
                 element: <Product />,
+                loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/product/single/${params.id}`),
             },
             {
                 path: "/blog",

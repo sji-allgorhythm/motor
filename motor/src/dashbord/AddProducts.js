@@ -24,7 +24,18 @@ export const AddProducts = () => {
         const seller_location = data.pickUp_location
         const seller_name = data.seller_name
         const seller_email = data.seller_email
+        let category_name
+        if (category_id === '637f7fc50a9cd6168efe98b5') {
+            category_name = "Honda"
+        } else if (category_id === '637f7fc50a9cd6168efe98b6') {
+            category_name = "KTM"
+        } else if (category_id === '637f7fc50a9cd6168efe98b7') {
+            category_name = "Suzuki"
+        } else if (category_id === '637f7fc50a9cd6168efe98b8') {
+            category_name = "Yamaha"
+        }
 
+        console.log(category_name, category_id)
 
         const formData = new FormData()
         formData.append('image', data.product_image[0])
@@ -45,12 +56,15 @@ export const AddProducts = () => {
                     used_time,
                     product_condition,
                     category_id,
+                    category_name,
                     seller_mobile,
                     seller_location,
                     seller_name,
                     seller_email
 
                 }
+
+                console.log(addProduct)
 
 
                 // sending the data to server
@@ -125,9 +139,9 @@ export const AddProducts = () => {
                                 <label htmlFor="condition" className="leading-7 text-md text-gray-600">Condition Type</label>
                                 <select id="condition" {...register("condition", { required: true })} className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-[10px] px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <option value="">Select...</option>
-                                    <option value="fair">Fair</option>
-                                    <option value="good">Good</option>
-                                    <option value="excellent">Excellent</option>
+                                    <option value="Fair">Fair</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Excellent">Excellent</option>
                                 </select>
                             </div>
                         </div>
