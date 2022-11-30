@@ -13,6 +13,7 @@ export const AddProducts = () => {
 
     const onSubmit = data => {
 
+        const advertise = false
         const product_name = data.product_name
         const product_description = data.message
         const original_price = data.or_price
@@ -24,6 +25,7 @@ export const AddProducts = () => {
         const seller_location = data.pickUp_location
         const seller_name = data.seller_name
         const seller_email = data.seller_email
+
         let category_name
         if (category_id === '637f7fc50a9cd6168efe98b5') {
             category_name = "Honda"
@@ -60,7 +62,8 @@ export const AddProducts = () => {
                     seller_mobile,
                     seller_location,
                     seller_name,
-                    seller_email
+                    seller_email,
+                    advertise
 
                 }
 

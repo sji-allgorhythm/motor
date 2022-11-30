@@ -16,7 +16,10 @@ export const Header = () => {
                     <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 text-xl flex flex-wrap items-center text-base justify-center">
                         <NavLink to="/" className="mr-5 hover:text-gray-100">Home</NavLink>
                         <NavLink to="/blog" className="mr-5 hover:text-gray-100">Blog</NavLink>
-                        <NavLink to="/dashbord" className="mr-5 hover:text-gray-100">Dashbord</NavLink>
+                        {
+                            user?.uid &&
+                            <NavLink to="/dashbord" className="mr-5 hover:text-gray-100">Dashbord</NavLink>
+                        }
                     </nav>
 
                     {
