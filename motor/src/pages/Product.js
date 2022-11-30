@@ -18,17 +18,23 @@ export const Product = () => {
     const product_name = form.name.value;
     const product_resellPrice = form.re_price.value;
     const buyer_mobile = form.user_mobile.value;
-    const Meeting = form.meeting_location.value;
-    const buyer_name = form.user_name.value;
+    const meeting_location = form.meeting_location.value;
+    const buyer_name = data?.seller_email
     const buyer_email = form.user_email.value;
+    const seller_name = data?.seller_name
+    const seller_email = data?.seller_email
+    const seller_mobile = data?.seller_mobile
 
     const order = {
       product_name,
       product_resellPrice,
       buyer_mobile,
-      Meeting,
+      meeting_location,
       buyer_name,
       buyer_email,
+      seller_name,
+      seller_email,
+      seller_mobile
     }
 
 
@@ -50,7 +56,7 @@ export const Product = () => {
         }
       })
 
-    
+
     console.log(order)
   }
 

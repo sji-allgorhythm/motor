@@ -71,8 +71,9 @@ export const routes = createBrowserRouter([
                 element: <PrivateRoute><AllProducts /></PrivateRoute>,
             },
             {
-                path: "/dashbord/my-order",
-                element: <PrivateRoute><MyOrder /></PrivateRoute>,
+                path: "/dashbord/my-order/:id",
+                element: <PrivateRoute><MyOrder/></PrivateRoute>,
+                loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/order/${params.id}`),
             },
             {
                 path: "/dashbord/all/sellers",

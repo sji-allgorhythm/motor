@@ -1,6 +1,9 @@
 import React from 'react'
+import { useLoaderData } from 'react-router-dom'
 
 export const MyOrder = () => {
+    const data = useLoaderData()
+    console.log(data)
     return (
         <section className="text-gray-600 body-font relative">
             <div className="container px-5 py-24 mx-auto">
@@ -12,33 +15,28 @@ export const MyOrder = () => {
                                 <th></th>
                                 <th>Product Name</th>
                                 <th>Purchase Price</th>
-                                <th>Your Phone</th>
                                 <th>Meeting Location</th>
-                                <th>Buyer Name</th>
+                                <th>Seller Name</th>
+                                <th>Seller Phone</th>
                             </tr>
                         </thead>
-                        {/* <tbody>
+                        <tbody>
                             {
-                                products.map((product, i) =>
-                                    <tr key={product?._id}>
+                                data.map((order, i) =>
+                                    <tr key={order?._id}>
                                         <th>{i + 1}</th>
-                                        <td>
 
-                                            <div className="avatar">
-                                                <div className="w-24 rounded">
-                                                    <img src={product?.product_img} />
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>{product?.product_name}</td>
-                                        <td>{product?.original_price}</td>
-                                        <td>{product?.resell_price}</td>
+                                        <td>{order?.product_name}</td>
+                                        <td>{order?.product_resellPrice}</td>
+                                        <td>{order?.meeting_location}</td>
+                                        <td>{order?.seller_name}</td>
+                                        <td>{order?.seller_mobile}</td>
 
                                     </tr>
                                 )
                             }
 
-                        </tbody> */}
+                        </tbody>
                     </table>
                 </div>
             </div>
