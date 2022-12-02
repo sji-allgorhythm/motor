@@ -5,8 +5,9 @@ import { Link, useLoaderData } from 'react-router-dom'
 export const Category = () => {
     const data = useLoaderData()
 
-    console.log(data)
+    console.log("cat", data.length)
     return (
+        data.length ?
         <section className="text-gray-600 body-font">
             <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-wrap -m-4">
@@ -39,5 +40,7 @@ export const Category = () => {
                 </div>
             </div>
         </section >
+        : 
+        <div className='font-medium title-font mt-4 text-gray-900 text-lg text-accent p-24'>No Product Found on this Category!!</div>
     )
 }

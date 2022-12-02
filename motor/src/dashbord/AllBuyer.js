@@ -1,10 +1,34 @@
 import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { FaRegTrashAlt } from 'react-icons/fa'
+import { useLoaderData, useNavigate } from 'react-router-dom'
 
 export const AllBuyer = () => {
   const users = useLoaderData()
-
+  const navigate = useNavigate()
   const allBuyer = users.filter(buyer => buyer.role === "buyer")
+
+  // Action Delete
+  const handleDelete = id => {
+
+
+    // sending the data to server
+    fetch(`${process.env.REACT_APP_url}/api/user/${id}`, {
+      method: 'Delete',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("delete", data)
+        if (data.acknowledged) {
+          toast.success('Buyer Deleted')
+          navigate("/dashbord/all/buyers")
+        }
+      })
+  }
 
   return (
     <section className="text-gray-600 body-font relative">
@@ -27,7 +51,9 @@ export const AllBuyer = () => {
                     <th>{i + 1}</th>
                     <td>{user?.name}</td>
                     <td>{user?.email}</td>
-                    <td>Delete</td>
+                    <td>
+                      <button onClick={() => handleDelete(user?._id)} className='flex items-center py-2 text-primary'><FaRegTrashAlt /> Delete</button>
+                    </td>
                   </tr>
                 )
               }

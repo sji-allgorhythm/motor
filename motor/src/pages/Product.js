@@ -9,6 +9,8 @@ export const Product = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData()
 
+  console.log(new Date(data.timeStamp).toDateString())
+
   const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = e => {
@@ -50,7 +52,7 @@ export const Product = () => {
       .then((data) => {
         console.log(data)
         if (data.acknowledged) {
-          toast.success('Product Added')
+          toast.success('Product Booked')
           form.reset()
           setShowModal(false)
         }
@@ -106,6 +108,7 @@ export const Product = () => {
               <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
                 <div className="flex flex-col items-center text-center justify-center">
                   <h2 className='text-xl'>Seller Info</h2>
+                  <i className='text-primary'>{new Date(data.timeStamp).toDateString()}</i>
                   <h3 className="font-medium title-font mt-4 text-gray-900 text-lg">Name: <span className='text-accent'>{data?.seller_name}</span></h3>
                   <span className="flex ml-3 pl-3 py-1 space-x-2s">
                   </span>

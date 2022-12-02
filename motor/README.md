@@ -3,7 +3,7 @@
 Moons Law is an online Review Based Service based platform for single Lawyer.
 
 ## Live Link
-Hosted in Firebase -> [Moons Law](https://moons-law.web.app/)
+Hosted in Firebase -> [The Motor](https://motor-221b3.web.app/)
 
 ## Moons-Law Key Features
 
@@ -12,10 +12,16 @@ Hosted in Firebase -> [Moons Law](https://moons-law.web.app/)
 3. You can add Product once login as seller<br />
 4. Category wise product<br/>
 5. Seller can create advertise<br />
-6. Dedicated Blog Page<br />
-7. Single Page Application<br />
-8. 404 Page<br/>
+6. User can report and make product as wishlist<br />
+7. Admin can delete any Product<br />
+8. Dedicated Blog Page<br />
+9. Single Page Application<br />
+10. 404 Page<br/>
 
+## Admin Info
+
+User Name: moon@gmail.com <br />
+Password: 123456
 
 ## Dependencies
 

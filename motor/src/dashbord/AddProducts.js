@@ -11,9 +11,15 @@ export const AddProducts = () => {
 
     const navigate = useNavigate()
 
+    const stamp = new Date().getTime()
+
     const onSubmit = data => {
 
         const advertise = false
+        const wishlist = false
+        const verified = false
+        const timeStamp = stamp
+
         const product_name = data.product_name
         const product_description = data.message
         const original_price = data.or_price
@@ -37,7 +43,6 @@ export const AddProducts = () => {
             category_name = "Yamaha"
         }
 
-        console.log(category_name, category_id)
 
         const formData = new FormData()
         formData.append('image', data.product_image[0])
@@ -63,12 +68,12 @@ export const AddProducts = () => {
                     seller_location,
                     seller_name,
                     seller_email,
-                    advertise
+                    advertise,
+                    wishlist,
+                    verified,
+                    timeStamp
 
                 }
-
-                console.log(addProduct)
-
 
                 // sending the data to server
 
@@ -91,9 +96,7 @@ export const AddProducts = () => {
 
             })
 
-
     }
-
 
     return (
         <section className="text-gray-600 body-font relative">
