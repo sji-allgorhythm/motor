@@ -10,8 +10,6 @@ export const MyProducts = () => {
 
   const { user } = useContext(AuthContext);
 
-  console.log(user?.email)
-
   useEffect(() => {
     fetch(`${process.env.REACT_APP_url}/api/product/?email=${user?.email}`)
       .then(res => res.json())
@@ -22,7 +20,6 @@ export const MyProducts = () => {
 
   }, [user?.email, refresh])
 
-  console.log(products)
 
   // Action Delete
   const handleDelete = id => {
@@ -37,7 +34,6 @@ export const MyProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("delete", data)
         if (data.acknowledged) {
           toast.success('Product Deleted')
         }
@@ -54,7 +50,6 @@ export const MyProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("adv", data)
         if (data.acknowledged) {
           toast.success('Product Added')
         }

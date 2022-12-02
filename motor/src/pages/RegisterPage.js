@@ -24,7 +24,6 @@ export const RegisterPage = () => {
       role,
       verified,
     }
-    console.log(newUser);
 
     createUser(email, password)
       .then((result) => {

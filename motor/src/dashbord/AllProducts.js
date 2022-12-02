@@ -17,7 +17,6 @@ export const AllProducts = () => {
 
     }, [refresh])
 
-    // console.log(products)
 
     // Action Delete
     const handleDelete = id => {
@@ -32,7 +31,6 @@ export const AllProducts = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log("delete", data)
                 if (data.acknowledged) {
                     toast.success('Product Deleted')
                 }

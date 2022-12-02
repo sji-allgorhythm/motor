@@ -22,7 +22,6 @@ export const AllBuyer = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("delete", data)
         if (data.acknowledged) {
           toast.success('Buyer Deleted')
           navigate("/dashbord/all/buyers")

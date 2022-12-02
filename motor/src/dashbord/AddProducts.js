@@ -86,7 +86,6 @@ export const AddProducts = () => {
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data)
                         if (data.acknowledged) {
                             toast.success('Product Added')
                             reset();

@@ -5,8 +5,6 @@ export const Wishlist = () => {
 
     const products = useLoaderData()
 
-    console.log(products.length)
-
     return (
         <section className="text-gray-600 body-font relative">
             <div className="container px-5 py-24 mx-auto">

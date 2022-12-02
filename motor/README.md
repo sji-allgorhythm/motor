@@ -20,8 +20,8 @@ Hosted in Firebase -> [The Motor](https://motor-221b3.web.app/)
 
 ## Admin Info
 
-User Name: moon@gmail.com <br />
-Password: 123456
+adminEmail: moon@gmail.com <br />
+adminPassword: 123456 <br />
 
 ## Dependencies
 

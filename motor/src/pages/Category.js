@@ -5,7 +5,6 @@ import { Link, useLoaderData } from 'react-router-dom'
 export const Category = () => {
     const data = useLoaderData()
 
-    console.log("cat", data.length)
     return (
         data.length ?
         <section className="text-gray-600 body-font">

@@ -21,14 +21,13 @@ export const Reported = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log("delete", data)
                 if (data.acknowledged) {
                     toast.success('Product Deleted')
                 }
                 setRefresh(!refresh)
             })
     }
-console.log(products)
+
     return (
         <section className="text-gray-600 body-font relative">
             <div className="container px-5 py-24 mx-auto">

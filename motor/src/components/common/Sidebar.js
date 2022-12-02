@@ -11,7 +11,6 @@ export const Sidebar = () => {
     fetch(`${process.env.REACT_APP_url}/api/user`)
       .then(res => res.json())
       .then(data => setDbUser(data))
-    // .then(data => console.log(data))
 
   }, [])
 
@@ -24,7 +23,6 @@ export const Sidebar = () => {
   // Sellers Varification 
   const sellers = dbUser?.filter(seller => seller?.role === "seller")
 
-  // console.log(buyerOnly);
 
   return (
     <aside className="w-64" aria-label="Sidebar">
