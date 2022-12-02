@@ -7,9 +7,12 @@ import Dashbord from "../dashbord/Dashbord";
 import { DashbordHome } from "../dashbord/DashbordHome";
 import { MyOrder } from "../dashbord/MyOrder";
 import { MyProducts } from "../dashbord/MyProducts";
+import { Reported } from "../dashbord/Reported";
+import { Wishlist } from "../dashbord/Wishlist";
 import Main from "../layout/Main";
 import { Blog } from "../pages/Blog";
 import { Category } from "../pages/Category";
+import { ErrorPage } from "../pages/ErrorPage";
 import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { Product } from "../pages/Product";
@@ -20,6 +23,7 @@ export const routes = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
@@ -67,12 +71,22 @@ export const routes = createBrowserRouter([
                 element: <PrivateRoute><MyProducts /></PrivateRoute>,
             },
             {
+                path: "/dashbord/product/wishlist",
+                element: <PrivateRoute><Wishlist /></PrivateRoute>,
+                loader: () => fetch(`${process.env.REACT_APP_url}/api/all/product`)
+            },
+            {
+                path: "/dashbord/product/reported",
+                element: <PrivateRoute><Reported /></PrivateRoute>,
+                loader: () => fetch(`${process.env.REACT_APP_url}/api/all/product`)
+            },
+            {
                 path: "/dashbord/all/products",
                 element: <PrivateRoute><AllProducts /></PrivateRoute>,
             },
             {
                 path: "/dashbord/my-order/:id",
-                element: <PrivateRoute><MyOrder/></PrivateRoute>,
+                element: <PrivateRoute><MyOrder /></PrivateRoute>,
                 loader: async ({ params }) => fetch(`${process.env.REACT_APP_url}/api/order/${params.id}`),
             },
             {

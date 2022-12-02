@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast';
-import { FaRegFileExcel } from 'react-icons/fa';
+import { FaRegFileExcel, FaRegHeart } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthProvider';
 
@@ -60,6 +60,38 @@ export const Product = () => {
     console.log(order)
   }
 
+  // Report Action 
+  const handleReport = id => {
+
+    // sending the data to server
+    fetch(`${process.env.REACT_APP_url}/api/product/report/${id}`, {
+      method: 'Post',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("adv", data)
+        if (data.acknowledged) {
+          toast.success('Report Send to Admin')
+        }
+      })
+  }
+
+  // Wishlist Action 
+  const handleWishlist = id => {
+
+    // sending the data to server
+    fetch(`${process.env.REACT_APP_url}/api/product/wishlist/${id}`, {
+      method: 'Post',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("adv", data)
+        if (data.acknowledged) {
+          toast.success('Wish List Added')
+        }
+      })
+  }
+
   return (
     <>
 
@@ -113,7 +145,8 @@ export const Product = () => {
                     onClick={() => setShowModal(true)}>
                     Order Now
                   </button>
-                  <button className='cursor-pointer text-white bg-accent rounded border-0 py-2 px-6 ml-2'><FaRegFileExcel /></button>
+                  <button onClick={() => handleReport(data?._id)} className='cursor-pointer text-white bg-accent rounded border-0 py-2 px-6 ml-2 tooltip' data-tip="Report"><FaRegFileExcel /></button>
+                  <button onClick={() => handleWishlist(data?._id)} className='cursor-pointer text-white bg-accent rounded border-0 py-2 px-6 ml-2 tooltip' data-tip="Wishlist"><FaRegHeart /></button>
                 </div>
               </div>
             </div>

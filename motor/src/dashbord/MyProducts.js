@@ -45,10 +45,11 @@ export const MyProducts = () => {
       })
   }
 
+  // Advertise Action 
   const handleAdv = id => {
 
     // sending the data to server
-    fetch(`${process.env.REACT_APP_url}/api/update/product/${id}`, {
+    fetch(`${process.env.REACT_APP_url}/api/product/update/${id}`, {
       method: 'Post',
     })
       .then((res) => res.json())
