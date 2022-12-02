@@ -9,8 +9,6 @@ export const Product = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData()
 
-  console.log(new Date(data.timeStamp).toDateString())
-
   const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = e => {
@@ -50,7 +48,6 @@ export const Product = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (data.acknowledged) {
           toast.success('Product Booked')
           form.reset()
@@ -58,8 +55,6 @@ export const Product = () => {
         }
       })
 
-
-    console.log(order)
   }
 
   // Report Action 
@@ -71,7 +66,6 @@ export const Product = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("adv", data)
         if (data.acknowledged) {
           toast.success('Report Send to Admin')
         }
@@ -87,7 +81,6 @@ export const Product = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("adv", data)
         if (data.acknowledged) {
           toast.success('Wish List Added')
         }

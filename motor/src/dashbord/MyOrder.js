@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom'
 
 export const MyOrder = () => {
     const data = useLoaderData()
-    console.log(data)
+
     return (
         <section className="text-gray-600 body-font relative">
             <div className="container px-5 py-24 mx-auto">
@@ -25,13 +25,11 @@ export const MyOrder = () => {
                                 data.map((order, i) =>
                                     <tr key={order?._id}>
                                         <th>{i + 1}</th>
-
                                         <td>{order?.product_name}</td>
                                         <td>{order?.product_resellPrice}</td>
                                         <td>{order?.meeting_location}</td>
                                         <td>{order?.seller_name}</td>
                                         <td>{order?.seller_mobile}</td>
-
                                     </tr>
                                 )
                             }
