@@ -1,6 +1,6 @@
-# Moons-Law Repository
+# Motor Repository
 
-Moons Law is an online Review Based Service based platform for single Lawyer.
+Motor is an online Review Based Service based platform for single Lawyer.
 
 ## Live Link
 Hosted in Firebase -> [The Motor](https://motor-221b3.web.app/)
